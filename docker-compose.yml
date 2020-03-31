@@ -1,0 +1,33 @@
+version: '3.7'
+services: 
+    employee-app: 
+        image: amitfegade121/spring-boot-employee-app:1.0
+        ports:
+           - "8080:8080"
+        restart: always
+        depends_on: 
+           - mysql
+        environment:
+           RDS_HOSTNAME: mysql
+        networks:
+           - employee-app-network
+    
+    mysql:
+        images: mysql
+        ports: 
+           - "3306:3306"
+        restart: always
+        environment:
+           MYSQL_ROOT_USER: root
+           MYSQL_ROOT_PASSWORD: root
+           MYSQL_DATABASE: hr
+        volumes:
+           - mysql-database-data: /var/lib/mysql
+        networks:
+           - employee-app-network
+             
+volumes:
+   mysql-database-data:
+
+networks:
+   employee-app-network:                              
