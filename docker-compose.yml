@@ -13,7 +13,7 @@ services:
            - employee-app-network
     
     mysql:
-        images: mysql
+        image: mysql
         ports: 
            - "3306:3306"
         restart: always
@@ -22,7 +22,7 @@ services:
            MYSQL_ROOT_PASSWORD: root
            MYSQL_DATABASE: hr
         volumes:
-           - mysql-database-data: /var/lib/mysql
+           - mysql-database-data:/var/lib/mysql
         networks:
            - employee-app-network
              
